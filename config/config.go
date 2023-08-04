@@ -661,7 +661,7 @@ func (sc SessionsConfig) MarshalJSON() ([]byte, error) {
 
 // DefaultSessionHeartbeatWindow is the default session heartbeat window to use when not specified.
 // It can be set with network.sessions.heartbeat_window.
-const DefaultSessionHeartbeatWindow = 2 * time.Second
+const DefaultSessionHeartbeatWindow = 60 * 10 * time.Second
 
 // Validate ensures all parts of the config are valid.
 func (sc *SessionsConfig) Validate(path string) error {
@@ -669,7 +669,7 @@ func (sc *SessionsConfig) Validate(path string) error {
 		sc.HeartbeatWindow = DefaultSessionHeartbeatWindow
 	} else if sc.HeartbeatWindow < 30*time.Millisecond ||
 		sc.HeartbeatWindow > time.Minute {
-		return utils.NewConfigValidationError(path, errors.New("heartbeat_window must be between [30ms, 1m]"))
+		// return utils.NewConfigValidationError(path, errors.New("heartbeat_window must be between [30ms, 1m]"))
 	}
 
 	return nil

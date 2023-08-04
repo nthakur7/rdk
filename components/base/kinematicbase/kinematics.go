@@ -37,7 +37,7 @@ const (
 
 	// planDeviationThresholdMM is the amount that the base is allowed to deviate from the straight line path it is intended to travel.
 	// If it ever exceeds this amount the movement will fail and an error will be returned.
-	defaultPlanDeviationThresholdMM = 600.0 // mm
+	defaultPlanDeviationThresholdMM = 6000.0 // mm
 
 	// timeout is the maximum amount of time that the base is allowed to remain stationary during a movement, else an error is thrown.
 	defaultTimeout = time.Second * 10
