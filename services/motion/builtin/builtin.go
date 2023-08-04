@@ -188,8 +188,9 @@ func (ms *builtIn) MoveOnMap(
 ) (bool, error) {
 	operation.CancelOtherWithLabel(ctx, builtinOpLabel)
 	kinematicsOptions := kinematicbase.NewKinematicBaseOptions()
-	kinematicsOptions.LinearVelocityMMPerSec = 300
-	kinematicsOptions.HeadingThresholdDegrees = 15
+	kinematicsOptions.LinearVelocityMMPerSec = 200
+	kinematicsOptions.HeadingThresholdDegrees = 8
+	kinematicsOptions.AngularVelocityDegsPerSec = 30
 	kinematicsOptions.GoalRadiusMM = 200
 	extra["planning_alg"] = "cbirrt"
 
@@ -566,6 +567,12 @@ func (ms *builtIn) planMoveOnMap(
 		return nil, nil, err
 	}
 	plan, err := motionplan.FrameStepsFromRobotPath(f.Name(), solutionMap)
-	ms.logger.Warn(plan)
+	planStr := ""
+	for _, step := range plan {
+		tempStr := ""
+		fmt.Printf(tempStr, "%v,%v ", step[0].Value, step[1].Value)
+		planStr += tempStr
+	}
+	ms.logger.Warn(planStr)
 	return plan, kb, err
 }
