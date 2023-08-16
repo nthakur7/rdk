@@ -143,6 +143,8 @@ func (mp *rrtStarConnectMotionPlanner) rrtBackgroundRunner(ctx context.Context,
 		default:
 		}
 
+		mp.logger.Warnf("RRT* running iteration: %d", i)
+
 		tryExtend := func(target []referenceframe.Input) (node, node, error) {
 			// attempt to extend maps 1 and 2 towards the target
 			// If ctx is done, nearest neighbors will be invalid and we want to return immediately
